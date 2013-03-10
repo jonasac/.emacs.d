@@ -6,22 +6,21 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/config/themes")
 (require 'packages)
 
-;; Store backup and autosave files in tmp dir
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+;; Store backup and autosave files in the systems /tmp dir
+(setq backup-directory-alist `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 
 (unless (file-exists-p save-dir)
   (make-directory save-dir))
 
 ;; saveplace remembers your location in a file when saving files
-(setq save-place-file (expand-file-name "saveplace" root-dir))
+(setq save-place-file (expand-file-name "saveplace" save-dir))
 (setq-default save-place t)
 (require 'saveplace)
+
 (when (eq system-type 'darwin)
   (require 'osx))
-(require 'gui)
+(require 'ui)
 (require 'editor)
 (require 'bindings)
 (require 'plugins)
