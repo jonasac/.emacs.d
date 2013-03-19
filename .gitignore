@@ -4,3 +4,4 @@ savefile
 elpa
 config/themes/snorkelfrosk-theme.el
 config/custom.el
+ac-comphist.dat

@@ -10,9 +10,10 @@
 (defvar my-packages
  '(molokai-theme paredit rainbow-delimiters 
 		 melpa clojure-mode nrepl 
-		 magit exec-path-from-shell smart-tab
+		 magit exec-path-from-shell
 		 rainbow-mode smex find-file-in-project
-		 ido-ubiquitous undo-tree slime))
+		 ido-ubiquitous undo-tree slime
+		 auto-complete))
 
 (defun packages-installed-p ()
   (loop for p in my-packages

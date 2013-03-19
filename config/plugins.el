@@ -1,7 +1,3 @@
-;; Make tab complete or indent according context
-(require 'smart-tab)
-(global-smart-tab-mode 1)
-
 ;; Paredit is awesomesauce
 (require 'paredit)
 
@@ -18,7 +14,7 @@
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'paredit-mode)
 (add-hook 'clojure-mode-hook 'clojure-test-mode)
-(setq inferior-lisp-program "/usr/local/bin/sbcl")
+(setq inferior-lisp-program "/usr/local/bin/clisp")
 (require 'slime)
 (slime-setup)
 
@@ -27,5 +23,9 @@
   (window-configuration-to-register :magit-fullscreen)
   ad-do-it
   (delete-other-windows))
+
+;; auto-completions
+(require 'auto-complete-config)
+(ac-config-default)
 
 (provide 'plugins)
