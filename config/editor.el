@@ -26,13 +26,18 @@
 ;; Lines should be 80 characters
 (setq fill-column 80)
 
-;; Highlight the current line
-(global-hl-line-mode +1)
-
 ;; Paste things from emacs clipboard outside emacs
 (setq x-select-enable-clipboard t)
+
+;; Autopair parens etc
+(electric-pair-mode t)
 
 ;; Dont break lines
 (setq-default truncate-lines t)
 
+;; Show trailing spaces
+(setq show-trailing-whitespace t)
+
 (provide 'editor)
+
+

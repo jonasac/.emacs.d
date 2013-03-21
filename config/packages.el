@@ -13,7 +13,7 @@
 		 magit exec-path-from-shell
 		 rainbow-mode smex find-file-in-project
 		 ido-ubiquitous undo-tree slime
-		 auto-complete))
+		 auto-complete volatile-highlights yasnippet))
 
 (defun packages-installed-p ()
   (loop for p in my-packages

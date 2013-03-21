@@ -26,8 +26,9 @@
 ;; Better yes/no questions 
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Cleanliness is next to godliness
-(load-theme 'snorkelfrosk t)
+;; Load theme if we are in gui
+(when window-system
+  (load-theme 'adwaita t))
 
 ;; Don't ring the bell
 (setq ring-bell-function 'ignore)

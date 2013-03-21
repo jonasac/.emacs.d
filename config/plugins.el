@@ -24,8 +24,15 @@
   ad-do-it
   (delete-other-windows))
 
-;; auto-completions
+;; Auto-completions
 (require 'auto-complete-config)
 (ac-config-default)
 
+;; Volatile Highlights
+(require 'volatile-highlights)
+(volatile-highlights-mode t)
+
+;; Yasnippet
+(require 'yasnippet)
+(yas-global-mode 1)
 (provide 'plugins)

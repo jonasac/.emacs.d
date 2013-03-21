@@ -21,4 +21,10 @@
 ;; Magit
 (global-set-key (kbd "C-c g") 'magit-status)
 
+;; Start eshell or switch to it if it is active
+(global-set-key (kbd "C-x m") 'eshell)
+
+;; Alternative to M-x
+(global-set-key (kbd "C-x C-m") 'execute-extended-command)
+
 (provide 'bindings)
