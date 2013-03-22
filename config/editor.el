@@ -38,6 +38,10 @@
 ;; Show trailing spaces
 (setq show-trailing-whitespace t)
 
+(require 'whitespace)
+(setq whitespace-line-column 80)
+(setq whitespace-style '(face tabs empty trailing lines-tail))
+
 (provide 'editor)
 
 

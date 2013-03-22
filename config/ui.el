@@ -43,9 +43,13 @@
 ;; Imenu should always rescan the buffer
 (setq imenu-auto-rescan t)
 
+;; dired - resuse current buffer by pressing 'a'
+(put 'dired-find-alternate-file 'disabled nil)
+
 ;; ediff - don't start another frame
 (require 'ediff)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
 ;; Enable ido-mode everywhere
 (ido-mode t)
 (ido-ubiquitous t)
