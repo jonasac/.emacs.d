@@ -14,7 +14,7 @@
 		 rainbow-mode smex find-file-in-project
 		 ido-ubiquitous undo-tree slime
 		 auto-complete volatile-highlights yasnippet
-		 clojure-test-mode))
+		 clojure-test-mode virtualenv))
 
 (defun packages-installed-p ()
   (loop for p in my-packages
