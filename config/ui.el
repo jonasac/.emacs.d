@@ -27,8 +27,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Load theme if we are in gui
-(when window-system
-  (load-theme 'adwaita t))
+(load-theme 'wombat t)
 
 ;; Don't ring the bell
 (setq ring-bell-function 'ignore)
@@ -41,11 +40,12 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
-;; Fix ediff insanity
-(setq ediff-diff-options "-w")
-(setq ediff-split-window-function 'split-window-horizontally)
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+;; Imenu should always rescan the buffer
+(setq imenu-auto-rescan t)
 
+;; ediff - don't start another frame
+(require 'ediff)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
 ;; Enable ido-mode everywhere
 (ido-mode t)
 (ido-ubiquitous t)

@@ -27,4 +27,7 @@
 ;; Alternative to M-x
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
 
+;; Imenu is awesome
+(global-set-key (kbd "C-x C-i") 'imenu)
+
 (provide 'bindings)

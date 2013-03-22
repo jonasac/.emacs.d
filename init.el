@@ -1,8 +1,10 @@
 (defvar root-dir (file-name-directory load-file-name))
 (defvar config-dir (concat root-dir "config/"))
+(defvar plugins-dir (concat config-dir "plugins/"))
 (defvar save-dir (concat root-dir "savefile/"))
 (setq custom-file (concat config-dir "custom.el"))
 (add-to-list 'load-path config-dir)
+(add-to-list 'load-path plugins-dir)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/config/themes")
 (require 'packages)
 
@@ -25,4 +27,3 @@
 (require 'bindings)
 (require 'plugins)
 (require 'defuns)
-
