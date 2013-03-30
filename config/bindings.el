@@ -1,6 +1,3 @@
-;; Enter makes newline and indents it accordingly
-(global-set-key (kbd "RET") 'newline-and-indent)
-
 ;; Better buffer handling
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
