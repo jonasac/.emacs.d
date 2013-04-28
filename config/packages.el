@@ -13,7 +13,7 @@
 		 magit exec-path-from-shell
 		 rainbow-mode smex find-file-in-project
 		 ido-ubiquitous undo-tree slime
-		 auto-complete volatile-highlights yasnippet
+		 auto-complete volatile-highlights 
 		 clojure-test-mode virtualenv))
 
 (defun packages-installed-p ()
