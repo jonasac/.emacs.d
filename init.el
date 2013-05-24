@@ -5,6 +5,7 @@
 (load custom-file 'noerror)
 (add-to-list 'load-path config-dir)
 
+;; Put backup stuff in /tmp so we dont keep it forever
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 (unless (file-exists-p save-dir)
