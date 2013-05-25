@@ -13,7 +13,7 @@
 
 ;; Setup verious things to load after the init file is done loading
 (require 'packages)
-(require 'init-builtin)
+(require 'init-buildtin)
 (require 'init-evil)
 (require 'init-autocomplete)
 (require 'init-system-specific)
