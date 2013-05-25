@@ -12,13 +12,11 @@
   (make-directory save-dir))
 
 ;; Setup verious things to load after the init file is done loading
-(add-hook 'after-init-hook
-	  (lambda ()
-	    (require 'init-builtin)
-	    (require 'package)
-	    (require 'init-evil)
-	    (require 'init-autocomplete)
-	    (load-theme 'anti-zenburn)))
+(require 'packages)
+(require 'init-builtin)
+(require 'init-evil)
+(require 'init-autocomplete)
+(load-theme 'anti-zenburn)
 
 ;; When opening a file put there cursor where it were when we closed the file.
 (require 'saveplace)
