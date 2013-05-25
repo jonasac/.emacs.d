@@ -16,6 +16,7 @@
 (require 'init-builtin)
 (require 'init-evil)
 (require 'init-autocomplete)
+(require 'init-system-specific)
 (load-theme 'anti-zenburn)
 
 ;; When opening a file put there cursor where it were when we closed the file.

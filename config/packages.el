@@ -9,7 +9,8 @@
   '(exec-path-from-shell
     evil
     auto-complete
-    anti-zenburn-theme))
+    anti-zenburn-theme
+    key-chord))
 
 (defun all-packages-installed-p ()
   "Check if all packages are already installed"
