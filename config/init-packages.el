@@ -29,4 +29,4 @@
 	  (remove-if #'package-installed-p my-packages))))
 (install-my-packages)
 
-(provide 'packages)
+(provide 'init-packages)

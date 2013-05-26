@@ -14,7 +14,7 @@
 ;; Setup verious things to load after the init file is done loading
 ;; If a filename begins with init, it is a file that we want loaded during init
 ;; If a filename begins with setup, it is probably loaded and configured via autoload mechanisms
-(require 'packages)
+(require 'init-packages)
 (require 'init-builtin)
 (require 'init-evil)
 (require 'init-autocomplete)
