@@ -12,14 +12,21 @@
   (make-directory save-dir))
 
 ;; Setup verious things to load after the init file is done loading
+;; If a filename begins with init, it is a file that we want loaded during init
+;; If a filename begins with setup, it is probably loaded and configured via autoload mechanisms
 (require 'packages)
-(require 'init-buildtin)
+(require 'init-builtin)
 (require 'init-evil)
 (require 'init-autocomplete)
 (require 'init-system-specific)
+(require 'setup-clojure)
 (load-theme 'anti-zenburn)
 
-;; When opening a file put there cursor where it were when we closed the file.
+; When opening a file put there cursor where it were when we closed the file.
 (require 'saveplace)
 (setq save-place-file (expand-file-name "saveplace" save-dir))
 (setq-default save-place t)
+(setq gnus-select-method '(nnimap "gmail"
+				  (nnimap-address "imap.gmail.com")
+				  (nnimap-server-port 993)
+				  (nnimap-stream ssl)))

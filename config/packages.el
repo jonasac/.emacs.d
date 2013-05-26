@@ -10,7 +10,11 @@
     evil
     auto-complete
     anti-zenburn-theme
-    key-chord))
+    key-chord
+    clojure-mode
+    nrepl
+    clojure-test-mode
+    powerline))
 
 (defun all-packages-installed-p ()
   "Check if all packages are already installed"
