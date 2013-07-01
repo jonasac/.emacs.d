@@ -3,18 +3,16 @@
 (package-initialize)
 (setq package-user-dir "~/.emacs.d/elpa")
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/"))
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 (defvar my-packages
   '(exec-path-from-shell
     evil
     auto-complete
-    anti-zenburn-theme
     key-chord
     clojure-mode
     nrepl
-    clojure-test-mode
-    powerline))
+    clojure-test-mode))
 
 (defun all-packages-installed-p ()
   "Check if all packages are already installed"

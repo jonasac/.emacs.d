@@ -2,11 +2,11 @@
 
 ;;; Init
 (setq inhibit-startup-screen t)
-(when (fboundp 'fringe-mode) (fringe-mode 0))
+;;(when (fboundp 'fringe-mode) (fringe-mode 0))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-
+(set-fringe-mode '(8 . 0))
 ;;;; OSX specific settings
 (when (eq system-type 'darwin)
   (setq mac-option-modifier nil
@@ -89,4 +89,21 @@
 ;; Trailing whitespace sucks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; Nice scrolling
+(setq scroll-margin 0
+      scroll-conservatively 100000
+      scroll-preserve-screen-position)
+
+;; Make the fringe blend in
+(set-face-background 'fringe "#242424")
+
+(setq ibuffer-saved-filter-groups
+      (quote (("default"
+	       ("erc" (mode . erc-mode))
+	       ("emacs" (or
+			 (name . "^\\*scratch\\*$")
+			 (name . "^\\*Messages\\*$")))))))
+(add-hook 'ibuffer-mode-hook
+	  (lambda ()
+	    (ibuffer-switch-to-saved-filter-groups "default")))
 (provide 'init-builtin)
