@@ -7,10 +7,10 @@
 
 (defvar my-packages
   '(exec-path-from-shell
-    auto-complete
     ido-ubiquitous
     clojure-mode
     nrepl
+    paredit
     clojure-test-mode))
 
 (defun all-packages-installed-p ()

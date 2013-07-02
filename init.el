@@ -20,7 +20,6 @@
 (require 'init-system-specific)
 (require 'init-keybindings)
 (require 'setup-clojure)
-(load-theme 'wombat)
 
 ; When opening a file put there cursor where it were when we closed the file.
 (require 'saveplace)

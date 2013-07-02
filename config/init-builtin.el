@@ -84,9 +84,6 @@
       scroll-conservatively 100000
       scroll-preserve-screen-position)
 
-;; Make the fringe blend in
-(set-face-background 'fringe "#242424")
-
 (setq ibuffer-saved-filter-groups
       (quote (("default"
 	       ("erc" (mode . erc-mode))
