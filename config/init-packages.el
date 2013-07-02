@@ -7,9 +7,8 @@
 
 (defvar my-packages
   '(exec-path-from-shell
-    evil
     auto-complete
-    key-chord
+    ido-ubiqitous
     clojure-mode
     nrepl
     clojure-test-mode))

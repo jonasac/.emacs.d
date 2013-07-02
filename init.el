@@ -18,6 +18,7 @@
 (require 'init-builtin)
 (require 'init-autocomplete)
 (require 'init-system-specific)
+(require 'init-keybindings)
 (require 'setup-clojure)
 (load-theme 'wombat)
 
