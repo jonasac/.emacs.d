@@ -8,7 +8,7 @@
 (defvar my-packages
   '(exec-path-from-shell
     auto-complete
-    ido-ubiqitous
+    ido-ubiquitous
     clojure-mode
     nrepl
     clojure-test-mode))

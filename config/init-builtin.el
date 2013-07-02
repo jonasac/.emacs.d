@@ -36,6 +36,7 @@
 
 ;; Enable ido-mode everywhere
 (ido-mode t)
+(ido-ubiquitous-mode)
 (setq ido-enable-prefix nil
       ido-enable-flex-matching t
       ido-create-new-buffer 'always
