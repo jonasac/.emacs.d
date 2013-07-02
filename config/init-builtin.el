@@ -6,6 +6,7 @@
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+
 ;;;; OSX specific settings
 (when (eq system-type 'darwin)
   (setq mac-option-modifier nil
@@ -46,14 +47,6 @@
       ido-save-directory-list-file (concat save-dir "ido.hist")
       ido-default-file-method 'selected-window)
 
-
-;; Make it harder to quit
-(global-set-key (kbd "C-x r q") 'save-buffers-kill-terminal)
-(global-set-key (kbd "C-x C-c") 'delete-frame)
-
-;; Start eshell or switch to it if it is active
-(global-set-key (kbd "C-x m") 'eshell)
-
 ;; Use spaces instead of tabs
 (setq-default indent-with-tabs-mode nil)
 
@@ -82,7 +75,7 @@
 ;; Paste things from emacs clipboard outside emacs
 (setq x-select-enable-clipboard t)
 
-;; Dont break lines
+; Dont break lines
 (setq-default truncate-lines t)
 
 ;; Trailing whitespace sucks
@@ -105,4 +98,5 @@
 (add-hook 'ibuffer-mode-hook
 	  (lambda ()
 	    (ibuffer-switch-to-saved-filter-groups "default")))
+
 (provide 'init-builtin)
