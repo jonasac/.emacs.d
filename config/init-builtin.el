@@ -6,7 +6,6 @@
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(set-fringe-mode '(8 . 0))
 ;;;; OSX specific settings
 (when (eq system-type 'darwin)
   (setq mac-option-modifier nil
