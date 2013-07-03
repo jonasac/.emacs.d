@@ -11,4 +11,4 @@
 ;; Go M-x without pressing M
 (global-set-key (kbd "C-x m") 'execute-extended-command)
 
-(provide 'init-keybindings)
+(provide 'bindings)

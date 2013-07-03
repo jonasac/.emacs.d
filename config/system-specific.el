@@ -5,4 +5,4 @@
   (setq mac-option-modifier nil
 	mac-command-modifier 'meta))
 
-(provide 'init-system-specific)
+(provide 'system-specific)

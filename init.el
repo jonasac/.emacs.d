@@ -15,11 +15,12 @@
 ;; If a filename begins with init, it is a file that we want loaded during init
 ;; If a filename begins with setup, it is probably loaded and configured via autoload mechanisms
 (require 'init-packages)
-(require 'init-builtin)
-(require 'init-autocomplete)
-(require 'init-system-specific)
-(require 'init-keybindings)
+(require 'core)
+(require 'system-specific)
+(require 'bindings)
 (require 'setup-clojure)
+(require 'defuns)
+(require 'programming)
 
 ; When opening a file put there cursor where it were when we closed the file.
 (require 'saveplace)

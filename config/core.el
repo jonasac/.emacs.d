@@ -1,16 +1,9 @@
-;; These are settings that come with emacs, assuming version >= 24.3
-
 ;;; Init
 (setq inhibit-startup-screen t)
 ;;(when (fboundp 'fringe-mode) (fringe-mode 0))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-
-;;;; OSX specific settings
-(when (eq system-type 'darwin)
-  (setq mac-option-modifier nil
-	mac-command-modifier 'meta))
 
 ;; Modeline info
 (line-number-mode t)
@@ -46,7 +39,7 @@
       ido-default-file-method 'selected-window)
 
 ;; Use spaces instead of tabs
-(setq-default indent-with-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 ;; Keep tabs 8 spaces wide
 (setq-default tab-width 8)
@@ -84,14 +77,9 @@
       scroll-conservatively 100000
       scroll-preserve-screen-position)
 
-(setq ibuffer-saved-filter-groups
-      (quote (("default"
-	       ("erc" (mode . erc-mode))
-	       ("emacs" (or
-			 (name . "^\\*scratch\\*$")
-			 (name . "^\\*Messages\\*$")))))))
-(add-hook 'ibuffer-mode-hook
-	  (lambda ()
-	    (ibuffer-switch-to-saved-filter-groups "default")))
+(setq ispell-program-name "aspell"
+      ispell-extra-args '("--sug-mode=ultra"))
 
-(provide 'init-builtin)
+(load-theme 'wombat)
+
+(provide 'core)
