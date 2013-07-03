@@ -1,3 +1,5 @@
+(require 'lisp)
+
 (eval-after-load 'clojure-mode
   '(progn
      (defun my-clojure-mode-defaults ()
@@ -10,4 +12,4 @@
 	    'nrepl-turn-on-eldoc-mode))
 
 
-(provide 'setup-clojure)
+(provide 'clojure)

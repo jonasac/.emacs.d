@@ -77,6 +77,7 @@
       scroll-conservatively 100000
       scroll-preserve-screen-position)
 
+(require 'flyspell)
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra"))
 
