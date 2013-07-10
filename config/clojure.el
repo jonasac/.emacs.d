@@ -5,7 +5,9 @@
      (defun my-clojure-mode-defaults ()
        (clojure-test-mode +1))
      (add-hook 'clojure-mode-hook (lambda ()
-				    (run-hooks 'my-clojure-mode-defaults)))))
+				    (run-hooks 'my-clojure-mode-defaults)))
+     (add-hook 'clojure-mode-hook (lambda ()
+                                    (run-hooks 'my-lisp-hook)))))
 
 (eval-after-load "nrepl"
   (add-hook 'nrepl-interaction-mode-hook

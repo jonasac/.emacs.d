@@ -10,8 +10,10 @@
     ido-ubiquitous
     clojure-mode
     nrepl
+    smex
     paredit
-    clojure-test-mode))
+    clojure-test-mode
+    subatomic-enhanced-theme))
 
 (defun all-packages-installed-p ()
   "Check if all packages are already installed"

@@ -81,6 +81,10 @@
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra"))
 
-(load-theme 'wombat)
+(require 'smex)
+(setq smex-save-file (expand-file-name ".smex-items" save-dir))
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 (provide 'core)

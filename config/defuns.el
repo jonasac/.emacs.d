@@ -10,4 +10,5 @@
 	 (t
 	  (rename-file filename new-name t)
 	  (set-visited-file-name new-name t t)))))))
+
 (provide 'defuns)
