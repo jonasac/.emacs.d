@@ -13,7 +13,7 @@
     smex
     paredit
     clojure-test-mode
-    subatomic-enhanced-theme))
+    jujube-theme))
 
 (defun all-packages-installed-p ()
   "Check if all packages are already installed"
