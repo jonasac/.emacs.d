@@ -4,6 +4,7 @@
 (setq custom-file (concat root-dir "custom.el"))
 (load custom-file 'noerror)
 (add-to-list 'load-path config-dir)
+(add-to-list 'custom-theme-load-path (concat root-dir "themes/"))
 
 ;; Put backup stuff in /tmp so we dont keep it forever
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
@@ -29,3 +30,5 @@
 (require 'saveplace)
 (setq save-place-file (expand-file-name "saveplace" save-dir))
 (setq-default save-place t)
+(put 'dired-find-alternate-file 'disabled nil)
+(load-theme 'solarized-dark t)

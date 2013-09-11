@@ -11,4 +11,8 @@
 ;; Go M-x without pressing M
 (global-set-key (kbd "C-x m") 'execute-extended-command)
 
+(global-set-key (kbd "M-/") 'hippie-expand)
+
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 (provide 'bindings)

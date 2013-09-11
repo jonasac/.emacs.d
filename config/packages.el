@@ -3,7 +3,7 @@
 (package-initialize)
 (setq package-user-dir "~/.emacs.d/elpa")
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (defvar my-packages
   '(exec-path-from-shell
@@ -13,7 +13,7 @@
     smex
     paredit
     clojure-test-mode
-    jujube-theme))
+    solarized-theme))
 
 (defun all-packages-installed-p ()
   "Check if all packages are already installed"

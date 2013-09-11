@@ -64,10 +64,11 @@
 (setq fill-column 80)
 
 ;; Paste things from emacs clipboard outside emacs
-(setq x-select-enable-clipboard t)
-
-; Dont break lines
-(setq-default truncate-lines t)
+(setq x-select-enable-clipboard t
+      x-select-enable-primary t
+      save-interprogram-paste-before-kill t
+      apropos-do-all t
+      mouse-yank-at-point t)
 
 ;; Trailing whitespace sucks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -77,6 +78,16 @@
       scroll-conservatively 100000
       scroll-preserve-screen-position)
 
+;; Make hippie-expand nicer
+(setq hippie-expand-try-functions-list '(try-expand-dabbrev
+                                         try-expand-dabbrev-all-buffers
+                                         try-expand-dabbrev-from-kill
+                                         try-complete-file-name-partially
+                                         try-complete-file-name
+                                         try-expand-all-abbrevs
+                                         try-expand-list
+                                         try-complete-lisp-symbol-partially
+                                         try-complete-lisp-symbol))
 (require 'flyspell)
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra"))
