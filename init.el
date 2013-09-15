@@ -12,7 +12,7 @@
 (unless (file-exists-p save-dir)
   (make-directory save-dir))
 
-;; Setup verious things to load after the init file is done loading
+;; Setup various things to load after the init file is done loading
 ;; If a filename begins with init, it is a file that we want loaded during init
 ;; If a filename begins with setup, it is probably loaded and configured via autoload mechanisms
 (require 'packages)
@@ -24,6 +24,7 @@
 (require 'lisp)
 (require 'emacs-lisp)
 (require 'clojure)
+(require 'sml)
 
 
 ; When opening a file put there cursor where it were when we closed the file.
@@ -31,4 +32,5 @@
 (setq save-place-file (expand-file-name "saveplace" save-dir))
 (setq-default save-place t)
 (put 'dired-find-alternate-file 'disabled nil)
-(load-theme 'solarized-dark t)
+
+(load-theme 'wombat t)

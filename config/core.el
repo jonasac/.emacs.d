@@ -19,6 +19,9 @@
 ;; Add parts of each file's directory to the buffer name if not unique
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
+(setq uniquify-separator "/")
+(setq uniquify-after-kill-buffer-p t) ; Rename after killing uniquified
+(setq uniquify-ignore-buffers-re "^\\*") ; don't rename special buffers
 
 ;; Imenu should always rescan the buffer
 (setq imenu-auto-rescan t)
@@ -28,6 +31,7 @@
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;; Enable ido-mode everywhere
+(require 'flx-ido)
 (ido-mode t)
 (ido-ubiquitous-mode)
 (setq ido-enable-prefix nil
@@ -36,7 +40,14 @@
       ido-use-filename-at-point 'guess
       ido-max-prospects 10
       ido-save-directory-list-file (concat save-dir "ido.hist")
-      ido-default-file-method 'selected-window)
+      ido-default-file-method 'selected-window
+      ido-auto-merge-work-directories-length -1)
+
+;; Better flexmatching for ido-mode
+(flx-ido-mode +1)
+
+;; Disable ido faces, so flx highlights are shown instead
+(setq ido-use-faces nil)
 
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
@@ -97,5 +108,26 @@
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+
+;; Cleanup modeline
+(require 'diminish)
+
+;; Awesome undo
+(global-undo-tree-mode)
+(diminish 'undo-tree-mode)
+
+
+(require 'volatile-highlights)
+(volatile-highlights-mode t)
+(diminish 'volatile-highlights-mode)
+
+;; Project management
+(require 'projectile)
+(setq projectile-cache-file (expand-file-name "projectile.cache" save-dir))
+(projectile-global-mode t)
+(diminish 'projectile-mode "prjtl")
+
+(require 'eshell)
+(setq eshell-directory-name (expand-file-name "eshell" save-dir))
 
 (provide 'core)

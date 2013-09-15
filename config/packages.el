@@ -5,27 +5,38 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-(defvar my-packages
+(defvar jac-packages
   '(exec-path-from-shell
     ido-ubiquitous
-    clojure-mode
-    nrepl
     smex
-    paredit
-    clojure-test-mode
-    solarized-theme))
+    projectile
+    flx-ido
+    magit
+    diminish
+    key-chord
+    undo-tree
+    volatile-highlights
+    expand-region))
 
-(defun all-packages-installed-p ()
+(defun jac-all-packages-installed-p ()
   "Check if all packages are already installed"
-  (every #'package-installed-p my-packages))
+  (every #'package-installed-p jac-packages))
 
 (defun install-my-packages ()
   "Installs packages that are not already installed on system."
   (interactive)
-  (unless (all-packages-installed-p)
+  (unless (jac-all-packages-installed-p)
     (package-refresh-contents)
     (mapc #'package-install
-	  (remove-if #'package-installed-p my-packages))))
+	  (remove-if #'package-installed-p jac-packages))))
+
+(defun jac-autoinstall-package (package)
+  (unless (package-installed-p package)
+    (package-install package)))
+
+(defun jac-ensure-packages-installed (packages)
+  (mapc #'jac-autoinstall-package packages))
+
 (install-my-packages)
 
 (provide 'packages)

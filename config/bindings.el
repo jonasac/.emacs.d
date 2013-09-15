@@ -15,4 +15,16 @@
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+(global-set-key (kbd "C-x g") 'magit-status)
+
+(global-set-key (kbd "C-x t") 'jac-toggle-eshell-visor)
+
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+(require 'key-chord)
+
+(key-chord-define-global "uu" 'undo-tree-visualize)
+
+(key-chord-mode +1)
 (provide 'bindings)

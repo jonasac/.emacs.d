@@ -1,11 +1,9 @@
-(eval-after-load 'paredit
-  '(progn
-     (define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
-     (define-key paredit-mode-map (kbd "M-(") 'paredit-backward-slurp-sexp)))
+(require 'programming)
+(jac-ensure-packages-installed '(rainbow-delimiters))
 
-(defun lisp-defaults ()
-  (paredit-mode +1))
+(defun jac-lisp-defaults ()
+  (rainbow-delimiters-mode +1))
 
-(setq my-lisp-hook 'lisp-defaults)
+(setq jac-lisp-hook 'jac-lisp-defaults)
 
 (provide 'lisp)
