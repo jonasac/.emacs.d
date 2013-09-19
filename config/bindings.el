@@ -23,8 +23,10 @@
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 (require 'key-chord)
-
 (key-chord-define-global "uu" 'undo-tree-visualize)
-
+(key-chord-define-global "jj" 'ace-jump-word-mode)
+(key-chord-define-global "jl" 'ace-jump-line-mode)
+(key-chord-define-global "jk" 'ace-jump-char-mode)
 (key-chord-mode +1)
+
 (provide 'bindings)

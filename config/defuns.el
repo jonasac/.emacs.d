@@ -20,5 +20,4 @@
     (call-interactively 'eshell)
     (delete-other-windows)))
 
-
 (provide 'defuns)

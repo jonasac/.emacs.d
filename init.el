@@ -26,7 +26,6 @@
 (require 'clojure)
 (require 'sml)
 
-
 ; When opening a file put there cursor where it were when we closed the file.
 (require 'saveplace)
 (setq save-place-file (expand-file-name "saveplace" save-dir))

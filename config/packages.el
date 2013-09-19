@@ -16,7 +16,9 @@
     key-chord
     undo-tree
     volatile-highlights
-    expand-region))
+    expand-region
+    ack-and-a-half
+    ace-jump-mode))
 
 (defun jac-all-packages-installed-p ()
   "Check if all packages are already installed"

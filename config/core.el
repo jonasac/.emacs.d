@@ -109,6 +109,10 @@
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
+(require 'paren)
+(setq show-paren-style 'parenthesis)
+(show-paren-mode +1)
+
 ;; Cleanup modeline
 (require 'diminish)
 
@@ -124,10 +128,18 @@
 ;; Project management
 (require 'projectile)
 (setq projectile-cache-file (expand-file-name "projectile.cache" save-dir))
+(setq projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" save-dir))
 (projectile-global-mode t)
-(diminish 'projectile-mode "prjtl")
+(diminish 'projectile-mode "Prjl")
+(projectile-load-known-projects)
 
 (require 'eshell)
 (setq eshell-directory-name (expand-file-name "eshell" save-dir))
+
+;; Shorter aliases for ack-and-a-half commands
+(defalias 'ack 'ack-and-a-half)
+(defalias 'ack-same 'ack-and-a-half-same)
+(defalias 'ack-find-file 'ack-and-a-half-find-file)
+(defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)
 
 (provide 'core)
