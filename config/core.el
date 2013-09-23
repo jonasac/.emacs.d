@@ -75,11 +75,11 @@
 (setq fill-column 80)
 
 ;; Paste things from emacs clipboard outside emacs
-(setq x-select-enable-clipboard t
-      x-select-enable-primary t
-      save-interprogram-paste-before-kill t
-      apropos-do-all t
-      mouse-yank-at-point t)
+;(setq x-select-enable-clipboard t
+ ;     x-select-enable-primary t
+  ;    save-interprogram-paste-before-kill t
+   ;   apropos-do-all t
+    ;  mouse-yank-at-point t)
 
 ;; Trailing whitespace sucks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)

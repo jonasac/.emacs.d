@@ -18,7 +18,8 @@
     volatile-highlights
     expand-region
     ack-and-a-half
-    ace-jump-mode))
+    ace-jump-mode
+    zenburn-theme))
 
 (defun jac-all-packages-installed-p ()
   "Check if all packages are already installed"

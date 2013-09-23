@@ -4,6 +4,6 @@
   (exec-path-from-shell-initialize)
   (setq mac-option-modifier nil
 	mac-command-modifier 'meta)
-  (set-face-attribute 'default nil :font "Menlo 11"))
+  (set-face-attribute 'default nil :font "Inconsolata 13"))
 
 (provide 'system-specific)

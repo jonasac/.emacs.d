@@ -2,10 +2,9 @@
 saveplace
 savefile
 elpa
-config/themes/snorkelfrosk-theme.el
 config/custom.el
-ac-comphist.dat
 eshell/
 auto-save-list/
 custom.el
 themes/
+org/

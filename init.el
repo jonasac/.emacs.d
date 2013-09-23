@@ -32,4 +32,4 @@
 (setq-default save-place t)
 (put 'dired-find-alternate-file 'disabled nil)
 
-(load-theme 'wombat t)
+(load-theme 'zenburn t)
