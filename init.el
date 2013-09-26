@@ -5,7 +5,7 @@
 (load custom-file 'noerror)
 (add-to-list 'load-path config-dir)
 (add-to-list 'custom-theme-load-path (concat root-dir "themes/"))
-
+(setq org-agenda-files (list (concat root-dir "org/todo.org")))
 ;; Put backup stuff in /tmp so we dont keep it forever
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
@@ -32,4 +32,4 @@
 (setq-default save-place t)
 (put 'dired-find-alternate-file 'disabled nil)
 
-(load-theme 'zenburn t)
+(load-theme 'ample t)

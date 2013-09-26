@@ -19,7 +19,8 @@
     expand-region
     ack-and-a-half
     ace-jump-mode
-    zenburn-theme))
+    ample-theme
+    smartparens))
 
 (defun jac-all-packages-installed-p ()
   "Check if all packages are already installed"
