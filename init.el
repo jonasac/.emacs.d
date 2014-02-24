@@ -20,11 +20,6 @@
 (require 'system-specific)
 (require 'bindings)
 (require 'defuns)
-(require 'programming)
-(require 'lisp)
-(require 'emacs-lisp)
-(require 'clojure)
-(require 'sml)
 (require 'jac-emms)
 
 ; When opening a file put there cursor where it were when we closed the file.
