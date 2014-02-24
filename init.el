@@ -33,4 +33,4 @@
 (setq-default save-place t)
 (put 'dired-find-alternate-file 'disabled nil)
 
-(load-theme 'ample t)
+(load-theme 'ujelly t)

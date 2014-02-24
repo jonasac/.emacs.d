@@ -98,7 +98,8 @@
                                          try-expand-all-abbrevs
                                          try-expand-list
                                          try-complete-lisp-symbol-partially
-                                         try-complete-lisp-symbol))
+                                         try-complete-lisp-symbol
+                                         yas/hippie-try-expand))
 (require 'flyspell)
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra"))
@@ -148,4 +149,9 @@
 ;; Paren matching and some paredit features
 (require 'smartparens-config)
 (smartparens-global-mode +1)
+(require 'smart-tab)
+(setq smart-tab-using-hippie-expand t)
+(global-smart-tab-mode 1)
+(require 'yasnippet)
+(yas-global-mode 1)
 (provide 'core)

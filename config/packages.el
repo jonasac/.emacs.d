@@ -2,8 +2,13 @@
 (require 'cl)
 (package-initialize)
 (setq package-user-dir "~/.emacs.d/elpa")
+
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+;; Get latest org-mode version
+(add-to-list 'package-archives
+             '("org" . "http://orgmode.org/elpa/") t)
 
 (defvar jac-packages
   '(exec-path-from-shell
@@ -19,8 +24,11 @@
     expand-region
     ack-and-a-half
     ace-jump-mode
-    ample-theme
-    smartparens))
+    smartparens
+    org
+    smart-tab
+    yasnippet
+    ujelly-theme))
 
 (defun jac-all-packages-installed-p ()
   "Check if all packages are already installed"
