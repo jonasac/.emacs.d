@@ -25,10 +25,9 @@
     ack-and-a-half
     ace-jump-mode
     smartparens
-    org
     smart-tab
     yasnippet
-    ujelly-theme))
+    solarized-theme))
 
 (defun jac-all-packages-installed-p ()
   "Check if all packages are already installed"

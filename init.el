@@ -27,4 +27,4 @@
 (setq-default save-place t)
 (put 'dired-find-alternate-file 'disabled nil)
 
-(load-theme 'ujelly t)
+(load-theme 'solarized-dark t)
