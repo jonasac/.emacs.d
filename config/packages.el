@@ -6,10 +6,6 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-;; Get latest org-mode version
-(add-to-list 'package-archives
-             '("org" . "http://orgmode.org/elpa/") t)
-
 (defvar jac-packages
   '(exec-path-from-shell
     ido-ubiquitous
@@ -22,11 +18,9 @@
     undo-tree
     volatile-highlights
     expand-region
-    ack-and-a-half
     ace-jump-mode
     smartparens
     smart-tab
-    yasnippet
     solarized-theme))
 
 (defun jac-all-packages-installed-p ()

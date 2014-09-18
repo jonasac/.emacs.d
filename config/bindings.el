@@ -29,6 +29,4 @@
 (key-chord-define-global "jk" 'ace-jump-char-mode)
 (key-chord-mode +1)
 
-(global-set-key "\C-ca" 'org-agenda)
-
 (provide 'bindings)

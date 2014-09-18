@@ -74,13 +74,6 @@
 ;; Lines should be 80 characters
 (setq fill-column 80)
 
-;; Paste things from emacs clipboard outside emacs
-;(setq x-select-enable-clipboard t
- ;     x-select-enable-primary t
-  ;    save-interprogram-paste-before-kill t
-   ;   apropos-do-all t
-    ;  mouse-yank-at-point t)
-
 ;; Trailing whitespace sucks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -98,8 +91,7 @@
                                          try-expand-all-abbrevs
                                          try-expand-list
                                          try-complete-lisp-symbol-partially
-                                         try-complete-lisp-symbol
-                                         yas/hippie-try-expand))
+                                         try-complete-lisp-symbol))
 (require 'flyspell)
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra"))
@@ -137,19 +129,12 @@
 (require 'eshell)
 (setq eshell-directory-name (expand-file-name "eshell" save-dir))
 
-;; Shorter aliases for ack-and-a-half commands
-(defalias 'ack 'ack-and-a-half)
-(defalias 'ack-same 'ack-and-a-half-same)
-(defalias 'ack-find-file 'ack-and-a-half-find-file)
-(defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)
-
-
 ;; Paren matching and some paredit features
 (require 'smartparens-config)
 (smartparens-global-mode +1)
+
 (require 'smart-tab)
 (setq smart-tab-using-hippie-expand t)
 (global-smart-tab-mode 1)
-(require 'yasnippet)
-(yas-global-mode 1)
+
 (provide 'core)
