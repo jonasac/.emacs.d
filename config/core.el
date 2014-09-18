@@ -143,8 +143,6 @@
 (defalias 'ack-find-file 'ack-and-a-half-find-file)
 (defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)
 
-;; Log completion of TODO items
-(setq org-log-done t)
 
 ;; Paren matching and some paredit features
 (require 'smartparens-config)
