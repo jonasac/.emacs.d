@@ -20,7 +20,6 @@
 (require 'system-specific)
 (require 'bindings)
 (require 'defuns)
-(require 'jac-emms)
 
 ; When opening a file put there cursor where it were when we closed the file.
 (require 'saveplace)
