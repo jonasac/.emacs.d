@@ -1,3 +1,13 @@
+;;;; init.el
+
+;; Turn off mouse interface early to avoid momentary display
+(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+;; Disable splash screen
+(setq inhibit-splash-screen t)
+
 (defvar root-dir (file-name-directory load-file-name))
 (defvar save-dir (concat root-dir "savefile/"))
 (defvar config-dir (concat root-dir "config/"))
@@ -10,19 +20,48 @@
 (unless (file-exists-p save-dir)
   (make-directory save-dir))
 
-;; Setup various things to load after the init file is done loading
-;; If a filename begins with init, it is a file that we want loaded during init
-;; If a filename begins with setup, it is probably loaded and configured via autoload mechanisms
-(require 'packages)
-(require 'core)
-(require 'system-specific)
-(require 'bindings)
-(require 'defuns)
+;;;; Packages
+(require 'package)
+(require 'cl)
+(setq package-user-dir "~/.emacs.d/elpa/")
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
 
-; When opening a file put there cursor where it were when we closed the file.
-(require 'saveplace)
-(setq save-place-file (expand-file-name "saveplace" save-dir))
-(setq-default save-place t)
-(put 'dired-find-alternate-file 'disabled nil)
+(defun jac-install-packages ()
+  "Install must have packages"
+  (interactive)
+  (let ((packages '(exec-path-from-shell
+                   ido-ubiquitous
+                   smex
+		   flx-ido
+                   projectile
+                   magit
+                   diminish
+                   key-chord
+                   undo-tree
+                   volatile-highlights
+                   expand-region
+                   ace-jump-mode
+                   smartparens
+                   smart-tab
+                   scala-mode2
+                   ensime
+                   solarized-theme)))
+    (unless (every #'package-installed-p packages)
+      (package-refresh-contents)
+      (mapc '(lambda (package)
+               (unless (package-installed-p package)
+                 (package-install package)))
+            packages))))
+(jac-install-packages)
+
+;;(require 'core)
+;;(require 'system-specific)
+;;(require 'bindings)
+;;(require 'defuns)
+
+;;; On OSX the defaul-directory is / for some reason, quick fix
+(setq default-directory "~/")
 
 (load-theme 'solarized-dark t)
