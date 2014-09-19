@@ -57,11 +57,20 @@
 (jac-install-packages)
 
 ;;(require 'core)
-;;(require 'system-specific)
 ;;(require 'bindings)
 ;;(require 'defuns)
 
-;;; On OSX the defaul-directory is / for some reason, quick fix
-(setq default-directory "~/")
+;;;; System specific
+(when (eq system-type 'darwin)
+  (require 'exec-path-from-shell)
+  (exec-path-from-shell-initialize)
+  (setq default-directory "~/")
+  (setq mac-option-modifier nil
+	mac-command-modifier 'meta)
+  (set-face-attribute 'default nil :font "Monaco 12"))
+
+(when (eq system-type 'gnu/linux)
+  (set-face-attribute 'default nil :font "Inconsolata 10")))
+
 
 (load-theme 'solarized-dark t)
