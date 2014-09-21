@@ -19,8 +19,10 @@
 (defvar my-packages '(better-defaults
                       smex
                       magit
-                      zenburn-theme
+                      ujelly-theme
                       find-file-in-project
+                      scala-mode2
+                      sbt-mode
                       exec-path-from-shell))
 
 (dolist (p my-packages)
@@ -28,7 +30,7 @@
     (package-install p)))
 
 ;;;; Look and feel
-(load-theme 'zenburn t)
+(load-theme 'ujelly t)
 (when (eq system-type 'darwin)
   (setq mac-option-modifier 'alt
         mac-command-modifier 'meta))
