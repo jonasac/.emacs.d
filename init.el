@@ -55,6 +55,7 @@
 (global-set-key (kbd "C-x t") 'my/toggle-eshell-visor)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x f") 'find-file-in-project)
+(global-set-key (kbd "RET") 'reindent-then-newline-and-indent)
 
 ;;;; Defuns
 (defun my/rename-buffer-and-file ()
@@ -78,3 +79,5 @@
     (window-configuration-to-register :pre-eshell-visor-window-configuration)
     (call-interactively 'eshell)
     (delete-other-windows)))
+
+
