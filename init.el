@@ -19,7 +19,7 @@
 (defvar my-packages '(better-defaults
                       smex
                       magit
-                      ujelly-theme
+                      solarized-theme
                       find-file-in-project
                       scala-mode2
                       sbt-mode
@@ -30,20 +30,18 @@
     (package-install p)))
 
 ;;;; Look and feel
-(load-theme 'ujelly t)
+(load-theme 'solarized-dark t)
 (when (eq system-type 'darwin)
   (setq mac-option-modifier 'alt
         mac-command-modifier 'meta))
-  
-(if window-system
-    (when (eq system-type 'darwin)
-      (progn 
-        (exec-path-from-shell-initialize)
-        (set-face-attribute 'default nil :font "Monaco 12")))
-  
-  (when (eq system-type 'gnu/linux)
-    (set-face-attribute 'default nil :font "Inconsolata 10")))
 
+(if window-system
+    (cond ((eq system-type 'darwin)
+           (progn
+             (exec-path-from-shell-initialize)
+             (set-default-font "Monaco 12")))
+          ((eq system-type 'gnu/linux)
+           (set-default-font "Ubuntu Mono 12"))))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (column-number-mode t)
