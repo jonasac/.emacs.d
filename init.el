@@ -3,7 +3,7 @@
 
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
 
 (package-initialize)
 
@@ -16,6 +16,7 @@
 
 ;;;; Variables
 (setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-splash-screen t
       ring-bell-function 'ignore
@@ -34,6 +35,7 @@
 
 ;;;; Look and feel
 (disable-gui-features)
+(load-theme 'wombat t)
 
 (when (osx-p)
   (progn
@@ -55,8 +57,7 @@
 
 (use-package autorevert
   :commands auto-revert-mode
-  :init
-  :diminish ""
+  :diminish 'auto-revert-mode
   (add-hook 'find-file-hook
             #'(lambda ()
                 (auto-revert-mode t))))
@@ -87,6 +88,12 @@
 (use-package ido
   :idle (require 'ido)
   :config (progn
+            (setq ido-ignore-buffers
+                  '("\\` "
+                    "*Messages*"
+                    "*Compile-Log*"
+                    "*Completions*"
+                    "*Help*"))
             (ido-everywhere t)
             (ido-mode t))
   :defer t)
@@ -96,8 +103,14 @@
   :init (ido-vertical-mode t)
   :ensure t)
 
+(use-package flx-ido
+  :defer t
+  :init (flx-ido-mode t)
+  :ensure t)
+
 (use-package git-gutter
   :defer t
+  :diminish ""
   :init (add-hook 'prog-mode-hook 'git-gutter-mode)
   :ensure t)
 
