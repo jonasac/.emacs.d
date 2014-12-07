@@ -1,5 +1,10 @@
 ;;;; Packages
+
 (load-file "~/.emacs.d/jonasac.el")
+
+(when (osx-p)
+  (when (file-exists-p "~/.mu4e_settings.el")
+    (load-file "~/.mu4e_settings.el")))
 
 (require 'package)
 (add-to-list 'package-archives
@@ -12,12 +17,15 @@
 
 (when (not (package-installed-p 'use-package))
   (package-install 'use-package))
+
 (require 'use-package)
 
 ;;;; Variables
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (defalias 'yes-or-no-p 'y-or-n-p)
+(prefer-coding-system 'utf-8)
+(delete-selection-mode t)
 (setq inhibit-splash-screen t
       ring-bell-function 'ignore
       custom-file (expand-file-name "~/.emacs.d/custom.el")
@@ -25,23 +33,20 @@
       x-select-enable-clipboard t
       x-select-enable-primary t
       save-interprogram-paste-before-kill t
-      apropos-do-all t
-      mouse-yank-at-point t
       require-final-newline t
       visible-bell t
       tab-always-indent 'complete
+      initial-scratch-message ""
       backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
-
 
 ;;;; Look and feel
 (disable-gui-features)
-(load-theme 'wombat t)
 
 (when (osx-p)
   (progn
     (setq mac-option-modifier 'alt
           mac-command-modifier 'meta)
-    (set-default-font "Monaco 12")))
+    (set-default-font "Monaco 11")))
 
 (when (linux-p)
   (set-default-font "Ubuntu Mono 11"))
@@ -57,14 +62,13 @@
 
 (use-package autorevert
   :commands auto-revert-mode
-  :diminish 'auto-revert-mode
+  :init
   (add-hook 'find-file-hook
             #'(lambda ()
                 (auto-revert-mode t))))
 
 (use-package guide-key
   :ensure t
-  :diminish ""
   :init
   (progn
     (setq guide-key/guide-key-sequence '("C-x" "C-c" "C-h")
@@ -88,12 +92,6 @@
 (use-package ido
   :idle (require 'ido)
   :config (progn
-            (setq ido-ignore-buffers
-                  '("\\` "
-                    "*Messages*"
-                    "*Compile-Log*"
-                    "*Completions*"
-                    "*Help*"))
             (ido-everywhere t)
             (ido-mode t))
   :defer t)
@@ -110,17 +108,37 @@
 
 (use-package git-gutter
   :defer t
-  :diminish ""
   :init (add-hook 'prog-mode-hook 'git-gutter-mode)
   :ensure t)
+
+(use-package zenburn-theme
+  :ensure t
+  :init (load-theme 'zenburn t))
+
+(use-package volatile-highlights
+  :ensure t
+  :defer t
+  :commands volatile-highlights-mode
+  :init (volatile-highlights-mode t))
+
+(use-package jabber
+  :ensure t
+  :init (progn
+          (setq jabber-account-list
+                '(("jonasacl@chat.uio.no"
+                   (:network-server . "chat.uio.no")
+                   (:connection-type . ssl))))
+          (setq jabber-show-offline-contacts nil
+                jabber-roster-line-format "%c %-25n %u %-8s  %S")))
+(use-package company
+  :ensure t
+  :init (global-company-mode))
 
 ;;;; Keybindings
 (global-set-key (kbd "C-x t") 'my/toggle-eshell-visor)
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-S") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "RET") 'reindent-then-newline-and-indent)
-
-
