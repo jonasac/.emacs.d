@@ -2,10 +2,6 @@
 
 (load-file "~/.emacs.d/jonasac.el")
 
-(when (osx-p)
-  (when (file-exists-p "~/.mu4e_settings.el")
-    (load-file "~/.mu4e_settings.el")))
-
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
@@ -44,7 +40,7 @@
 
 (when (osx-p)
   (progn
-    (setq mac-option-modifier 'alt
+    (setq mac-option-modifier nil
           mac-command-modifier 'meta)
     (set-default-font "Monaco 11")))
 
@@ -54,7 +50,7 @@
 ;;;; Packages
 (when (osx-p)
   (use-package exec-path-from-shell
-    :idle (exec-path-from-shell-initialize)
+    :init (exec-path-from-shell-initialize)
     :ensure t))
 
 (use-package paren
@@ -90,7 +86,7 @@
   :ensure t)
 
 (use-package ido
-  :idle (require 'ido)
+  :init (require 'ido)
   :config (progn
             (ido-everywhere t)
             (ido-mode t))
@@ -106,33 +102,14 @@
   :init (flx-ido-mode t)
   :ensure t)
 
-(use-package git-gutter
-  :defer t
-  :init (add-hook 'prog-mode-hook 'git-gutter-mode)
+(use-package pastelmac-theme
   :ensure t)
-
-(use-package zenburn-theme
-  :ensure t
-  :init (load-theme 'zenburn t))
 
 (use-package volatile-highlights
   :ensure t
   :defer t
   :commands volatile-highlights-mode
   :init (volatile-highlights-mode t))
-
-(use-package jabber
-  :ensure t
-  :init (progn
-          (setq jabber-account-list
-                '(("jonasacl@chat.uio.no"
-                   (:network-server . "chat.uio.no")
-                   (:connection-type . ssl))))
-          (setq jabber-show-offline-contacts nil
-                jabber-roster-line-format "%c %-25n %u %-8s  %S")))
-(use-package company
-  :ensure t
-  :init (global-company-mode))
 
 ;;;; Keybindings
 (global-set-key (kbd "C-x t") 'my/toggle-eshell-visor)
