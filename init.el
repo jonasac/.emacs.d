@@ -71,34 +71,12 @@
           guide-key/popup-window-position 'bottom)
     (guide-key-mode t)))
 
-(use-package smex
-  :bind (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands))
-  :ensure t)
-
 (use-package magit
   :bind ("C-x g" . magit-status)
   :ensure t)
 
-(use-package ido
-  :init (require 'ido)
-  :config (progn
-            (ido-everywhere t)
-            (ido-mode t))
-  :defer t)
-
-(use-package ido-vertical-mode
-  :defer t
-  :init (ido-vertical-mode t)
-  :ensure t)
-
-(use-package flx-ido
-  :defer t
-  :init (flx-ido-mode t)
-  :ensure t)
-
 (use-package solarized-theme
-  :init (load-theme 'solarized-dark)
+  :init (load-theme 'solarized-dark t)
   :ensure t)
 
 (use-package volatile-highlights
@@ -106,6 +84,27 @@
   :defer t
   :commands volatile-highlights-mode
   :init (volatile-highlights-mode t))
+
+(use-package ivy
+  :config (ivy-mode 1)
+  :ensure t)
+
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file))
+  :ensure t)
+
+(use-package groovy-mode :mode "\\.gradle\\'")
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+(use-package meghanada :config (add-hook 'java-mode-hook
+                                         (lambda ()
+                                           (meghanada-mode t)
+                                           (add-hook 'before-save-hook 'meghanada-code-beautify-before-save))))
+  
 
 ;;;; Keybindings
 (global-set-key (kbd "C-x t") 'my/toggle-eshell-visor)
