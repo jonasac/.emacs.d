@@ -4,7 +4,7 @@
 
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa" . "https://stable.melpa.org/packages/") t)
 
 (package-initialize)
 
@@ -36,19 +36,19 @@
       backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;;;; Look and feel
-(disable-gui-features)
+(my/disable-gui-features)
 
-(when (osx-p)
+(when (my/osx-p)
   (progn
     (setq mac-option-modifier nil
           mac-command-modifier 'meta)
     (set-default-font "Monaco 11")))
 
-(when (linux-p)
+(when (my/linux-p)
   (set-default-font "Ubuntu Mono 11"))
 
 ;;;; Packages
-(when (osx-p)
+(when (my/osx-p)
   (use-package exec-path-from-shell
     :init (exec-path-from-shell-initialize)
     :ensure t))
@@ -70,11 +70,6 @@
     (setq guide-key/guide-key-sequence '("C-x" "C-c" "C-h")
           guide-key/popup-window-position 'bottom)
     (guide-key-mode t)))
-
-(use-package projectile
-  :init (add-hook 'prog-mode-hook 'projectile-mode)
-  :defer t
-  :ensure t)
 
 (use-package smex
   :bind (("M-x" . smex)
@@ -102,7 +97,8 @@
   :init (flx-ido-mode t)
   :ensure t)
 
-(use-package pastelmac-theme
+(use-package solarized-theme
+  :init (load-theme 'solarized-dark)
   :ensure t)
 
 (use-package volatile-highlights

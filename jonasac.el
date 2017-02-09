@@ -1,8 +1,8 @@
 ;;;; A hodgepodge of useful macros and functions
-(defmacro osx-p ()
+(defmacro my/osx-p ()
   `(equal system-type 'darwin))
 
-(defmacro linux-p ()
+(defmacro my/linux-p ()
   `(equal system-type 'gnu/linux))
 
 (defun my/rename-buffer-and-file ()
@@ -27,7 +27,7 @@
     (call-interactively 'eshell)
     (delete-other-windows)))
 
-(defun disable-gui-features ()
+(defun my/disable-gui-features ()
   (progn
     (menu-bar-mode -1)
     (when (fboundp 'tool-bar-mode)
