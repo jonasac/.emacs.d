@@ -26,8 +26,6 @@
       ring-bell-function 'ignore
       custom-file (expand-file-name "~/.emacs.d/custom.el")
       package-user-dir "~/.emacs.d/elpa/"
-      x-select-enable-clipboard t
-      x-select-enable-primary t
       save-interprogram-paste-before-kill t
       require-final-newline t
       visible-bell t
@@ -42,10 +40,10 @@
   (progn
     (setq mac-option-modifier nil
           mac-command-modifier 'meta)
-    (set-default-font "Monaco 11")))
+    (set-frame-font "Monaco 11")))
 
 (when (my/linux-p)
-  (set-default-font "Ubuntu Mono 11"))
+  (set-frame-font "Ubuntu Mono 11"))
 
 ;;;; Packages
 (when (my/osx-p)
@@ -58,6 +56,7 @@
 
 (use-package autorevert
   :commands auto-revert-mode
+  :diminish auto-revert-mode
   :init
   (add-hook 'find-file-hook
             #'(lambda ()
@@ -65,9 +64,10 @@
 
 (use-package guide-key
   :ensure t
+  :diminish guide-key-mode
   :init
   (progn
-    (setq guide-key/guide-key-sequence '("C-x" "C-c" "C-h")
+    (setq guide-key/guide-key-sequence '("C-x" "C-c" "C-h" "C-c p")
           guide-key/popup-window-position 'bottom)
     (guide-key-mode t)))
 
@@ -82,11 +82,13 @@
 (use-package volatile-highlights
   :ensure t
   :defer t
+  :diminish volatile-highlights-mode
   :commands volatile-highlights-mode
   :init (volatile-highlights-mode t))
 
 (use-package ivy
   :config (ivy-mode 1)
+  :diminish ivy-mode
   :ensure t)
 
 (use-package counsel
@@ -98,12 +100,21 @@
 
 (use-package flycheck
   :ensure t
+  :diminish flycheck-mode
   :init (global-flycheck-mode))
 
-(use-package meghanada :config (add-hook 'java-mode-hook
-                                         (lambda ()
-                                           (meghanada-mode t)
-                                           (add-hook 'before-save-hook 'meghanada-code-beautify-before-save))))
+(use-package meghanada
+  :ensure t
+  :config
+  (add-hook 'java-mode-hook
+            (lambda ()
+              (meghanada-mode t)
+              (add-hook 'before-save-hook 'meghanada-code-beautify-before-save))))
+
+(use-package projectile
+  :ensure t
+  :config (projectile-global-mode t))
+  
   
 
 ;;;; Keybindings
