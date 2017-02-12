@@ -11,3 +11,6 @@ org/
 /backups/
 /places
 /target/
+/ido.last
+*.eld
+*.jar

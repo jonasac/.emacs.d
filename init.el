@@ -3,18 +3,18 @@
 (load-file "~/.emacs.d/jonasac.el")
 
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://stable.melpa.org/packages/") t)
+
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+
+
 
 (package-initialize)
 
-(unless package-archive-contents
-  (package-refresh-contents))
-
-(when (not (package-installed-p 'use-package))
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
   (package-install 'use-package))
 
-(require 'use-package)
+
 
 ;;;; Variables
 (setq-default indent-tabs-mode nil)
@@ -23,14 +23,17 @@
 (prefer-coding-system 'utf-8)
 (delete-selection-mode t)
 (setq inhibit-splash-screen t
+      use-package-always-ensure t
       ring-bell-function 'ignore
       custom-file (expand-file-name "~/.emacs.d/custom.el")
       package-user-dir "~/.emacs.d/elpa/"
       save-interprogram-paste-before-kill t
       require-final-newline t
+      apropos-do-all t
       visible-bell t
       tab-always-indent 'complete
       initial-scratch-message ""
+      save-place-file (concat user-emacs-directory "places")
       backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;;;; Look and feel
@@ -40,7 +43,7 @@
   (progn
     (setq mac-option-modifier nil
           mac-command-modifier 'meta)
-    (set-frame-font "Monaco 11")))
+    (set-frame-font "Source Code Pro 11")))
 
 (when (my/linux-p)
   (set-frame-font "Ubuntu Mono 11"))
@@ -62,59 +65,58 @@
             #'(lambda ()
                 (auto-revert-mode t))))
 
-(use-package guide-key
-  :ensure t
-  :diminish guide-key-mode
-  :init
-  (progn
-    (setq guide-key/guide-key-sequence '("C-x" "C-c" "C-h" "C-c p")
-          guide-key/popup-window-position 'bottom)
-    (guide-key-mode t)))
+(use-package which-key
+  :diminish which-key-mode
+  :config (which-key-mode))
 
 (use-package magit
-  :bind ("C-x g" . magit-status)
-  :ensure t)
+  :bind ("C-x g" . magit-status))
 
-(use-package solarized-theme
-  :init (load-theme 'solarized-dark t)
-  :ensure t)
+(use-package material-theme
+  :init (load-theme 'material t))
 
 (use-package volatile-highlights
-  :ensure t
   :defer t
   :diminish volatile-highlights-mode
   :commands volatile-highlights-mode
   :init (volatile-highlights-mode t))
 
 (use-package ivy
-  :config (ivy-mode 1)
   :diminish ivy-mode
-  :ensure t)
+  :ensure t
+  :config (progn
+            (ivy-mode 1)
+            (use-package flx)))
 
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file))
-  :ensure t)
+         ("C-x C-f" . counsel-find-file)))
 
 (use-package groovy-mode :mode "\\.gradle\\'")
 
 (use-package flycheck
-  :ensure t
   :diminish flycheck-mode
-  :init (global-flycheck-mode))
-
-(use-package meghanada
-  :ensure t
-  :config
-  (add-hook 'java-mode-hook
-            (lambda ()
-              (meghanada-mode t)
-              (add-hook 'before-save-hook 'meghanada-code-beautify-before-save))))
+  :init (global-flycheck-mode)
+  :config (use-package flycheck-pos-tip
+            :ensure t
+            :init (with-eval-after-load 'flycheck
+                    (flycheck-pos-tip-mode))))
 
 (use-package projectile
-  :ensure t
-  :config (projectile-global-mode t))
+  :init (progn
+            (projectile-global-mode t)
+            (use-package counsel-projectile
+              :ensure t
+              :config (counsel-projectile-on))))
+
+(use-package meghanada
   
+  :config (progn
+            (add-hook 'java-mode-hook
+                    (lambda ()
+                      (meghanada-mode t)
+                      (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
+            (setq meghanada-use-company nil)))
   
 
 ;;;; Keybindings
