@@ -5,16 +5,13 @@
 (require 'package)
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-
-
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
-
-
 
 ;;;; Variables
 (setq-default indent-tabs-mode nil)
@@ -75,12 +72,6 @@
 (use-package material-theme
   :init (load-theme 'material t))
 
-(use-package volatile-highlights
-  :defer t
-  :diminish volatile-highlights-mode
-  :commands volatile-highlights-mode
-  :init (volatile-highlights-mode t))
-
 (use-package ivy
   :diminish ivy-mode
   :ensure t
@@ -110,15 +101,23 @@
               :config (counsel-projectile-on))))
 
 (use-package meghanada
-  
   :config (progn
             (add-hook 'java-mode-hook
                     (lambda ()
                       (meghanada-mode t)
-                      (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
-            (setq meghanada-use-company nil)))
-  
+                      (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))))
 
+(use-package evil
+  :init (progn
+          (evil-mode t)
+          (define-key evil-ex-map "e" 'counsel-find-file)
+          (define-key evil-ex-map "b" 'ivy-switch-buffer)
+
+          (use-package evil-leader
+            :init (global-evil-leader-mode)
+            :config (progn
+                      (evil-leader/set-leader "SPC")
+                      (evil-leader/set-key "b" 'switch-buffer)))))
 ;;;; Keybindings
 (global-set-key (kbd "C-x t") 'my/toggle-eshell-visor)
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
