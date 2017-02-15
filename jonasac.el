@@ -1,3 +1,4 @@
+;;; package --- jonasac.el
 ;;;; A hodgepodge of useful macros and functions
 (defmacro my/osx-p ()
   `(equal system-type 'darwin))

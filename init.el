@@ -1,4 +1,4 @@
-;;;; Packages
+;;; package --- init.el
 
 (load-file "~/.emacs.d/jonasac.el")
 
@@ -64,10 +64,18 @@
 
 (use-package which-key
   :diminish which-key-mode
-  :config (which-key-mode))
+  :config (progn
+            (which-key-add-key-based-replacements
+              "SPC g" "git"
+              "SPC f" "files"
+              "SPC p" "projectile"
+              "SPC b" "buffers"
+              "SPC h" "help")
+            (which-key-mode)))
 
 (use-package magit
-  :bind ("C-x g" . magit-status))
+  :config (progn
+            (evil-leader/set-key "gs" 'magit-status)))
 
 (use-package material-theme
   :init (load-theme 'material t))
@@ -77,11 +85,12 @@
   :ensure t
   :config (progn
             (ivy-mode 1)
+            (evil-leader/set-key "bb" 'ivy-switch-buffer)
             (use-package flx)))
 
 (use-package counsel
-  :bind (("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)))
+  :config (progn
+            (evil-leader/set-key "ff" 'counsel-find-file)))
 
 (use-package groovy-mode :mode "\\.gradle\\'")
 
@@ -95,10 +104,14 @@
 
 (use-package projectile
   :init (progn
-            (projectile-global-mode t)
+            (projectile-mode t)
             (use-package counsel-projectile
               :ensure t
-              :config (counsel-projectile-on))))
+              :config (progn
+                        (counsel-projectile-on)
+                        (evil-leader/set-key "pp" 'counsel-projectile-switch-project)
+                        (evil-leader/set-key "pb" 'counsel-projectile-switch-to-buffer)
+                        (evil-leader/set-key "pf" 'counsel-projectile-find-file)))))
 
 (use-package meghanada
   :config (progn
@@ -116,8 +129,7 @@
           (use-package evil-leader
             :init (global-evil-leader-mode)
             :config (progn
-                      (evil-leader/set-leader "SPC")
-                      (evil-leader/set-key "b" 'switch-buffer)))))
+                      (evil-leader/set-leader "SPC")))))
 ;;;; Keybindings
 (global-set-key (kbd "C-x t") 'my/toggle-eshell-visor)
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
