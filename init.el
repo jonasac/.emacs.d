@@ -5,7 +5,6 @@
 (require 'package)
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 (package-initialize)
 
@@ -65,10 +64,11 @@
 (use-package which-key
   :diminish which-key-mode
   :config (progn
+            (setq which-key-sort-order 'which-key-key-order-alpha)
             (which-key-add-key-based-replacements
               "SPC g" "git"
               "SPC f" "files"
-              "SPC p" "projectile"
+              "SPC p" "project"
               "SPC b" "buffers"
               "SPC h" "help")
             (which-key-mode)))
@@ -76,9 +76,6 @@
 (use-package magit
   :config (progn
             (evil-leader/set-key "gs" 'magit-status)))
-
-(use-package material-theme
-  :init (load-theme 'material t))
 
 (use-package ivy
   :diminish ivy-mode
@@ -96,45 +93,47 @@
 
 (use-package flycheck
   :diminish flycheck-mode
-  :init (global-flycheck-mode)
-  :config (use-package flycheck-pos-tip
-            :ensure t
-            :init (with-eval-after-load 'flycheck
-                    (flycheck-pos-tip-mode))))
+  :init (global-flycheck-mode))
 
 (use-package projectile
   :init (progn
             (projectile-mode t)
             (use-package counsel-projectile
-              :ensure t
               :config (progn
                         (counsel-projectile-on)
                         (evil-leader/set-key "pp" 'counsel-projectile-switch-project)
                         (evil-leader/set-key "pb" 'counsel-projectile-switch-to-buffer)
                         (evil-leader/set-key "pf" 'counsel-projectile-find-file)))))
 
-(use-package meghanada
-  :config (progn
-            (add-hook 'java-mode-hook
-                    (lambda ()
-                      (meghanada-mode t)
-                      (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))))
-
 (use-package evil
   :init (progn
           (evil-mode t)
-          (define-key evil-ex-map "e" 'counsel-find-file)
-          (define-key evil-ex-map "b" 'ivy-switch-buffer)
-
           (use-package evil-leader
             :init (global-evil-leader-mode)
             :config (progn
-                      (evil-leader/set-leader "SPC")))))
-;;;; Keybindings
-(global-set-key (kbd "C-x t") 'my/toggle-eshell-visor)
-(global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "C-M-S") 'isearch-forward)
-(global-set-key (kbd "C-M-r") 'isearch-backward)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "C-r") 'isearch-backward-regexp)
-(global-set-key (kbd "RET") 'reindent-then-newline-and-indent)
+                      (evil-leader/set-leader "SPC")
+                      (evil-leader/set-key "bk" 'kill-buffer)
+                      (evil-leader/set-key "hk" 'describe-key)
+                      (evil-leader/set-key "hv" 'describe-variable)
+                      (evil-leader/set-key "hf" 'describe-function)
+                      (evil-leader/set-key "hm" 'describe-mode)
+                      (evil-leader/set-key "hi" 'info)))))
+
+(use-package neotree
+  :init (progn
+          (evil-leader/set-key "ft" 'neotree-toggle)
+          (evil-leader/set-key "pt" 'neotree-find-project-root)
+          (setq neo-theme 'arrow)
+          (add-hook 'neotree-mode-hook
+                    (lambda ()
+                      (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-stretch-toggle)
+                      (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
+                      (define-key evil-normal-state-local-map (kbd "c") 'neotree-create-node)
+                      (define-key evil-normal-state-local-map (kbd "d") 'neotree-delete-node)
+                      (define-key evil-normal-state-local-map (kbd "gr") 'neotree-refresh)
+                      (define-key evil-normal-state-local-map (kbd "j") 'neotree-next-line)
+                      (define-key evil-normal-state-local-map (kbd "k") 'neotree-previous-line)
+                      (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)))))
+
+(use-package tao-theme
+  :init (load-theme 'tao-yang t))
