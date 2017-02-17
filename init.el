@@ -13,24 +13,24 @@
   (package-install 'use-package))
 
 ;;;; Variables
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
 (defalias 'yes-or-no-p 'y-or-n-p)
-(prefer-coding-system 'utf-8)
-(delete-selection-mode t)
 (setq inhibit-splash-screen t
       use-package-always-ensure t
       ring-bell-function 'ignore
-      custom-file (expand-file-name "~/.emacs.d/custom.el")
-      package-user-dir "~/.emacs.d/elpa/"
       save-interprogram-paste-before-kill t
       require-final-newline t
       apropos-do-all t
-      visible-bell t
-      tab-always-indent 'complete
+      custom-file "~/.emacs.d/custom.el"
       initial-scratch-message ""
-      save-place-file (concat user-emacs-directory "places")
-      backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
+      backup-directory-alist `(("" . ,(concat user-emacs-directory "backups"))))
+
+;; UTF-8
+(set-charset-priority         'unicode)
+(prefer-coding-system         'utf-8)
+(set-terminal-coding-system   'utf-8)
+(set-keyboard-coding-system   'utf-8)
+(set-selection-coding-system  'utf-8)
+(setq locale-coding-system    'utf-8)
 
 ;;;; Look and feel
 (my/disable-gui-features)
@@ -49,6 +49,12 @@
   (use-package exec-path-from-shell
     :init (exec-path-from-shell-initialize)
     :ensure t))
+
+(use-package saveplace
+  :init (save-place-mode 1)
+  :config
+  (setq-default save-place t)
+  (setq save-place-limit nil))
 
 (use-package paren
   :init (show-paren-mode t))
@@ -79,7 +85,6 @@
 
 (use-package ivy
   :diminish ivy-mode
-  :ensure t
   :config (progn
             (ivy-mode 1)
             (evil-leader/set-key "bb" 'ivy-switch-buffer)
@@ -87,7 +92,7 @@
 
 (use-package counsel
   :config (progn
-            (evil-leader/set-key "ff" 'counsel-find-file)))
+            (evil-leader/set-key "ff" 'find-file)))
 
 (use-package groovy-mode :mode "\\.gradle\\'")
 
@@ -117,7 +122,8 @@
                       (evil-leader/set-key "hv" 'describe-variable)
                       (evil-leader/set-key "hf" 'describe-function)
                       (evil-leader/set-key "hm" 'describe-mode)
-                      (evil-leader/set-key "hi" 'info)))))
+                      (evil-leader/set-key "hi" 'info)
+                      (evil-leader/set-key "ha" 'apropos-command)))))
 
 (use-package neotree
   :init (progn
@@ -137,3 +143,20 @@
 
 (use-package tao-theme
   :init (load-theme 'tao-yang t))
+
+(use-package shackle
+  :config
+  (shackle-mode 1)
+  (setq shackle-rules
+        `(
+          ("*Help*" :align below :size 16 :select t))))
+  
+
+(use-package company
+  :init
+  (setq company-idle-delay 0.2)
+  (global-company-mode))
+
+(use-package disable-mouse
+  :diminish global-disable-mouse-mode
+  :init (global-disable-mouse-mode))
