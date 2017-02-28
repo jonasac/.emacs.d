@@ -71,33 +71,20 @@
   :diminish which-key-mode
   :config
   (setq which-key-sort-order 'which-key-key-order-alpha)
-  (which-key-add-key-based-replacements
-    "SPC g" "git"
-    "SPC f" "file"
-    "SPC p" "project"
-    "SPC b" "buffer"
-    "SPC w" "window"
-    "SPC h" "help")
   (which-key-mode))
 
 (use-package magit
-  :commands (magit-status)
-  :init (evil-leader/set-key "gs" 'magit-status))
+  :commands (magit-status))
 
 (use-package ivy
   :commands (ivy-mode)
   :diminish ivy-mode
   :config
   (ivy-mode 1)
-  (evil-leader/set-key "bb" 'ivy-switch-buffer)
-  (define-key ivy-minibuffer-map (kbd "<escape>") 'keyboard-escape-quit)
   (use-package flx))
 
 (use-package counsel
-  :commands (counsel-M-x counsel-find-file)
-  :config
-  (evil-leader/set-key "SPC" 'counsel-M-x)
-  (evil-leader/set-key "ff" 'counsel-find-file))
+  :commands (counsel-M-x counsel-find-file))
 
 (use-package groovy-mode :mode "\\.gradle\\'")
 
@@ -110,31 +97,7 @@
   (projectile-mode t)
   (use-package counsel-projectile
     :config
-    (counsel-projectile-on)
-    (evil-leader/set-key "ps" 'counsel-projectile-ag)
-    (evil-leader/set-key "pp" 'counsel-projectile-switch-project)
-    (evil-leader/set-key "pb" 'counsel-projectile-switch-to-buffer)
-    (evil-leader/set-key "pf" 'counsel-projectile-find-file)))
-
-(use-package evil
-  :config
-  (evil-mode t)
-  (use-package evil-leader
-    :config
-    (global-evil-leader-mode)
-    (evil-leader/set-leader "SPC")
-    (evil-leader/set-key "bk" 'kill-buffer)
-    (evil-leader/set-key "hk" 'describe-key)
-    (evil-leader/set-key "hv" 'describe-variable)
-    (evil-leader/set-key "hf" 'describe-function)
-    (evil-leader/set-key "hm" 'describe-mode)
-    (evil-leader/set-key "hi" 'info)
-    (evil-leader/set-key "ha" 'apropos-command)
-    (evil-leader/set-key "wd" 'delete-window)
-    (evil-leader/set-key "wl" 'evil-window-right)
-    (evil-leader/set-key "wh" 'evil-window-left)
-    (evil-leader/set-key "wk" 'evil-window-up)
-    (evil-leader/set-key "wj" 'evil-window-down)))
+    (counsel-projectile-on)))
 
 (use-package arjen-grey-theme
   :config (load-theme 'arjen-grey t))
@@ -153,25 +116,3 @@
 (use-package disable-mouse
   :diminish global-disable-mouse-mode
   :config (global-disable-mouse-mode))
-
-(use-package vi-tilde-fringe
-  :config (global-vi-tilde-fringe-mode))
-
-(use-package neotree
-  :commands (neotree-toggle)
-  :init
-  (evil-leader/set-key "ft" 'neotree-toggle)
-  (evil-leader/set-key "pt" 'neotree-projectile-action)
-  :config
-  (setq neo-theme 'arrow
-	neo-smart-open t)
-  (add-hook 'neotree-mode-hook
-	    (lambda ()
-	      (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-stretch-toggle)
-	      (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
-	      (define-key evil-normal-state-local-map (kbd "c") 'neotree-create-node)
-	      (define-key evil-normal-state-local-map (kbd "d") 'neotree-delete-node)
-	      (define-key evil-normal-state-local-map (kbd "gr") 'neotree-refresh)
-	      (define-key evil-normal-state-local-map (kbd "j") 'neotree-next-line)
-	      (define-key evil-normal-state-local-map (kbd "k") 'neotree-previous-line)
-	      (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide))))
