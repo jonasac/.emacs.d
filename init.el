@@ -21,6 +21,7 @@
       require-final-newline t
       apropos-do-all t
       custom-file "~/.emacs.d/custom.el"
+      compilation-scroll-output t
       initial-scratch-message ""
       backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
 
@@ -39,7 +40,11 @@
   (progn
     (setq mac-option-modifier nil
           mac-command-modifier 'meta)
-    (set-frame-font "Source Code Pro 11")))
+    (set-face-attribute 'default nil
+			:family "Menlo"
+			:height 110
+			:weight 'normal
+			:width 'normal)))
 
 (when (my/linux-p)
   (set-frame-font "Ubuntu Mono 11"))
@@ -60,12 +65,8 @@
   :init (show-paren-mode t))
 
 (use-package autorevert
-  :commands auto-revert-mode
   :diminish auto-revert-mode
-  :init
-  (add-hook 'find-file-hook
-            #'(lambda ()
-                (auto-revert-mode t))))
+  :config (global-auto-revert-mode t))
 
 (use-package which-key
   :diminish which-key-mode
@@ -99,16 +100,18 @@
     :config
     (counsel-projectile-on)))
 
-(use-package arjen-grey-theme
-  :config (load-theme 'arjen-grey t))
+(use-package ample-theme
+  :config (load-theme 'ample-flat t))
 
 (use-package shackle
   :config
   (shackle-mode 1)
   (setq shackle-rules
-	`(("*Help*" :align below :size 16 :select t))))
+	`(("*Apropos*" :align below :size 16 :select t)
+	  ("*Help*" :align below :size 16 :select t))))
 
 (use-package company
+  :diminish company-mode
   :config
   (setq company-idle-delay 0.2)
   (global-company-mode))
