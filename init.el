@@ -23,7 +23,8 @@
       custom-file "~/.emacs.d/custom.el"
       compilation-scroll-output t
       initial-scratch-message ""
-      backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
+      backup-directory-alist `((".*" . ,temporary-file-directory))
+      auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 
 ;; UTF-8
 (set-charset-priority         'unicode)
@@ -41,7 +42,7 @@
     (setq mac-option-modifier nil
           mac-command-modifier 'meta)
     (set-face-attribute 'default nil
-			:family "Menlo"
+			:family "Source Code Pro"
 			:height 110
 			:weight 'normal
 			:width 'normal)))
@@ -66,7 +67,9 @@
 
 (use-package autorevert
   :diminish auto-revert-mode
-  :config (global-auto-revert-mode t))
+  :config
+  (setq auto-revert-check-vc-info t)
+  (global-auto-revert-mode t))
 
 (use-package which-key
   :diminish which-key-mode
@@ -90,8 +93,7 @@
 (use-package groovy-mode :mode "\\.gradle\\'")
 
 (use-package flycheck
-  :diminish flycheck-mode
-  :config (global-flycheck-mode))
+  :diminish flycheck-mode)
 
 (use-package projectile
   :config
@@ -100,8 +102,8 @@
     :config
     (counsel-projectile-on)))
 
-(use-package ample-theme
-  :config (load-theme 'ample-flat t))
+(use-package anti-zenburn-theme
+  :config (load-theme 'anti-zenburn t))
 
 (use-package shackle
   :config
@@ -119,3 +121,45 @@
 (use-package disable-mouse
   :diminish global-disable-mouse-mode
   :config (global-disable-mouse-mode))
+
+(use-package editorconfig
+  :diminish editorconfig-mode
+  :config
+  (editorconfig-mode 1))
+
+(use-package tern
+  :commands (tern-mode))
+
+(use-package js2-mode
+  :config
+
+  (use-package company-tern
+    :config (add-to-list 'company-backends 'company-tern))
+
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-jsx-mode))
+
+  (add-hook 'js2-mode-hook (lambda () (progn
+					(flycheck-mode)
+					(tern-mode))))
+
+  (add-hook 'flycheck-mode-hook
+	    (lambda ()
+	      (progn
+		(setq js2-mode-show-parse-errors nil
+		      js2-mode-show-strict-warnings nil) ;; Use eslint for this stuff
+		(let*
+		    ((root (locate-dominating-file
+			    (or (buffer-file-name) default-directory)
+			    "node_modules"))
+		     (eslint (and root
+				  (expand-file-name "node_modules/.bin/eslint"
+						    root))))
+		  (when (and eslint (file-executable-p eslint)
+			     (setq-local flycheck-javascript-eslint-executable eslint))))))))
+  
+
+
+
+
