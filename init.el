@@ -112,12 +112,6 @@
 	`(("*Apropos*" :align below :size 16 :select t)
 	  ("*Help*" :align below :size 16 :select t))))
 
-(use-package company
-  :diminish company-mode
-  :config
-  (setq company-idle-delay 0.2)
-  (global-company-mode))
-
 (use-package disable-mouse
   :diminish global-disable-mouse-mode
   :config (global-disable-mouse-mode))
@@ -126,40 +120,6 @@
   :diminish editorconfig-mode
   :config
   (editorconfig-mode 1))
-
-(use-package tern
-  :commands (tern-mode))
-
-(use-package js2-mode
-  :config
-
-  (use-package company-tern
-    :config (add-to-list 'company-backends 'company-tern))
-
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
-  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-jsx-mode))
-
-  (add-hook 'js2-mode-hook (lambda () (progn
-					(flycheck-mode)
-					(tern-mode))))
-
-  (add-hook 'flycheck-mode-hook
-	    (lambda ()
-	      (progn
-		(setq js2-mode-show-parse-errors nil
-		      js2-mode-show-strict-warnings nil) ;; Use eslint for this stuff
-		(let*
-		    ((root (locate-dominating-file
-			    (or (buffer-file-name) default-directory)
-			    "node_modules"))
-		     (eslint (and root
-				  (expand-file-name "node_modules/.bin/eslint"
-						    root))))
-		  (when (and eslint (file-executable-p eslint)
-			     (setq-local flycheck-javascript-eslint-executable eslint))))))))
-  
-
 
 
 
